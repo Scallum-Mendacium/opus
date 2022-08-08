@@ -2,6 +2,5 @@ import json
 
 
 def get_token() -> str:
-    with open("config.json", "r") as file:
-        data = json.load(file)
-        return data["token"]
+    with open("src/config.json") as f:
+        return json.load(f)["token"]
