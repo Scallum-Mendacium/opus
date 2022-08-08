@@ -18,17 +18,15 @@ class Task:
         self.due_date = str(due_date)
         self.notes = notes
 
-    def get_data(self) -> dict:
-        data = {
-            self.name: {
-                "description": self.description,
-                "created_on": self.created_on,
-                "due_date": self.due_date,
-                "notes": self.notes,
-            }
+    def get_task(self) -> dict:
+        task = {
+            "description": self.description,
+            "created_on": self.created_on,
+            "due_date": self.due_date,
+            "notes": self.notes,
         }
 
-        return data
+        return task
 
     def to_team(self, team_name):
         return TeamTask(
@@ -65,19 +63,17 @@ class TeamTask(Task):
         self.team_name = team_name
         self.assignees = assignees
 
-    def get_data(self) -> dict:
-        data = {
-            self.name: {
-                "description": self.description,
-                "author": self.author,
-                "assignees": self.assignees,
-                "created_on": self.created_on,
-                "due_date": self.due_date,
-                "notes": self.notes,
-            }
+    def get_task(self) -> dict:
+        task = {
+            "description": self.description,
+            "author": self.author,
+            "assignees": self.assignees,
+            "created_on": self.created_on,
+            "due_date": self.due_date,
+            "notes": self.notes,
         }
 
-        return data
+        return task
 
     def assign(self, assignee: str) -> None:
         (
