@@ -8,8 +8,8 @@ class Task:
         description: str,
         author: str,
         created_on: datetime = datetime.now(),
-        due_date: datetime | None = None,
-        notes: list[str] = [],
+        due_date: datetime = datetime(0, 0, 0),
+        notes: list[str] = ["No notes"],
     ) -> None:
         self.task_name = task_name
         self.description = description
@@ -49,8 +49,8 @@ class TeamTask(Task):
         author: str,
         assignees: list[str] = [],
         created_on: datetime = datetime.now(),
-        due_date: datetime | None = None,
-        notes: list[str] = [],
+        due_date: datetime = datetime(0, 0, 0),
+        notes: list[str] = ["No notes"],
     ) -> None:
         super().__init__(
             task_name=task_name,
