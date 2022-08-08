@@ -8,7 +8,7 @@ class Task:
         description: str,
         author: str,
         created_on: datetime = datetime.now(),
-        due_date: datetime = datetime(0, 0, 0),
+        due_date: datetime = datetime(1, 1, 1),
         notes: list[str] = ["No notes"],
     ) -> None:
         self.task_name = task_name
@@ -39,6 +39,9 @@ class Task:
             notes=self.notes,
         )
 
+    def __repr__(self) -> str:
+        return f"{self.task_name} : {self.get_task()}"
+
 
 class TeamTask(Task):
     def __init__(
@@ -47,9 +50,9 @@ class TeamTask(Task):
         team_name: str,
         description: str,
         author: str,
-        assignees: list[str] = [],
+        assignees: list[str] = ["No assignees"],
         created_on: datetime = datetime.now(),
-        due_date: datetime = datetime(0, 0, 0),
+        due_date: datetime = datetime(1, 1, 1),
         notes: list[str] = ["No notes"],
     ) -> None:
         super().__init__(
@@ -76,12 +79,15 @@ class TeamTask(Task):
         return task
 
     def assign(self, assignee: str) -> None:
-        (
-            (assignee not in self.assignees) and (assignee != self.author)
-        ) and self.assignees.append(assignee)
+        if assignee != self.author:
+            if assignee not in self.assignees:
+                self.assignees.append(assignee)
+                if self.assignees[0] == "No assignees":
+                    self.assignees.pop(0)
 
     def unassign(self, assignee: str) -> None:
-        (assignee in self.assignees) and self.assignees.remove(assignee)
+        if assignee in self.assignees:
+            self.assignees.remove(assignee)
 
     def set_team_name(self, team_name: str) -> None:
         self.team_name = team_name
