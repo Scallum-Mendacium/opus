@@ -99,3 +99,21 @@ class TeamTask(Task):
             self.due_date,
             self.notes,
         )
+
+
+def test_tasks():
+    task = Task(
+        "Nice", "AAAAAAA", "Utkarsh", due_date="Random thing", notes=["hmm", "hmmmm"]
+    )
+    print(task.get_data())
+    task = task.to_team("Epic team moment")
+    print(task.get_data())
+    task.assign("Praneeth")
+    task.assign("Utkarsh")
+    print(task.get_data())
+    task.unassign("Utkarsh")
+    print(task.get_data())
+    task.unassign("Praneeth")
+    print(task.get_data())
+    task = task.to_user("Utkarsh")
+    print(task.get_data())
