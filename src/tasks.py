@@ -4,14 +4,14 @@ from datetime import datetime
 class Task:
     def __init__(
         self,
-        name: str,
+        task_name: str,
         description: str,
         author: str,
         created_on: datetime = datetime.now(),
         due_date: datetime | None = None,
         notes: list[str] = [],
     ) -> None:
-        self.name = name
+        self.task_name = task_name
         self.description = description
         self.author = author
         self.created_on = str(created_on)
@@ -30,7 +30,7 @@ class Task:
 
     def to_team(self, team_name):
         return TeamTask(
-            self.name,
+            self.task_name,
             team_name,
             self.description,
             self.author,
@@ -43,7 +43,7 @@ class Task:
 class TeamTask(Task):
     def __init__(
         self,
-        name: str,
+        task_name: str,
         team_name: str,
         description: str,
         author: str,
@@ -53,7 +53,7 @@ class TeamTask(Task):
         notes: list[str] = [],
     ) -> None:
         super().__init__(
-            name=name,
+            task_name=task_name,
             description=description,
             author=author,
             created_on=created_on,
@@ -88,7 +88,7 @@ class TeamTask(Task):
 
     def to_user(self, author: str) -> Task:
         return Task(
-            self.name,
+            self.task_name,
             self.description,
             author,
             self.created_on,
