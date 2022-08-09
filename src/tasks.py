@@ -39,6 +39,9 @@ class Task:
             notes=self.notes,
         )
 
+    def format(self) -> str:
+        return f"Task Name : {self.task_name}\nDescription : {self.description}\nCreated On : {self.created_on}\nDue Date : {self.due_date}\nAdditional Notes : {str(self.notes)}"
+
     def __repr__(self) -> str:
         return f"{self.task_name} : {self.get_task()}"
 
@@ -101,6 +104,19 @@ class TeamTask(Task):
             self.due_date,
             self.notes,
         )
+
+    def format(self) -> str:
+        return f"Task Name : {self.task_name}\nDescription : {self.description}\nAuthor : {self.author}\nAssigned To : {self.assignees}\nCreated On : {self.created_on}\nDue Date : {self.due_date}\nAdditional Notes : {str(self.notes)}"
+
+
+def compile_format(tasklist: list[Task]) -> str:
+    return (
+        "```yaml\n"
+        + "\n\n".join(
+            [f"{index+1}. " + task.format() for index, task in enumerate(tasklist)]
+        )
+        + "```"
+    )
 
 
 def test_tasks():
