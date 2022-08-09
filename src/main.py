@@ -1,4 +1,3 @@
-from rich import print
 from datetime import datetime
 
 import interactions
