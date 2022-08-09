@@ -2,9 +2,22 @@ import firebase_admin
 from firebase_admin import credentials, db
 from tasks import Task, TeamTask
 from datetime import datetime
-from rich import print
+import os
 
-cred = credentials.Certificate("src/serviceAccountKey.json")
+CRED = {
+    "auth_provider_x509_cert_url": os.environ.get("auth_provider_x509_cert_url"),
+    "auth_uri": os.environ.get("auth_uri"),
+    "client_email": os.environ.get("client_email"),
+    "client_id": os.environ.get("client_id"),
+    "client_x509_cert_url": os.environ.get("client_x509_cert_url"),
+    "private_key": os.environ.get("private_key"),
+    "private_key_id": os.environ.get("private_key_id"),
+    "project_id": os.environ.get("project_id"),
+    "token_uri": os.environ.get("token_uri"),
+    "type": os.environ.get("type"),
+}
+
+cred = credentials.Certificate(CRED)
 app = firebase_admin.initialize_app(
     cred,
     {
