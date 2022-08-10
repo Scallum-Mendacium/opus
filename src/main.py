@@ -106,7 +106,7 @@ async def new_task(
             due_date=due_date,
             notes=notes,
         )
-        db.add_team_task(TeamTask)
+        db.add_team_task(task)
         await ctx.send(
             f"Task Added. Information about task : {compile_format([task.format()])}"
         )
